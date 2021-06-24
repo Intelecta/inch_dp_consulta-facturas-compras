@@ -1,9 +1,15 @@
 <mvc:View
   controllerName="inch_dp_consulta-facturas-compras.controller.Home"
+  displayBlock="true"
   xmlns:uxap="sap.uxap"
   xmlns:layout="sap.ui.layout" 
   xmlns="sap.m"
-  xmlns:mvc="sap.ui.core.mvc">
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:t="sap.ui.table">
   <App id="idAppControl" >
     <pages>
       <Page title="{i18n>title}">
@@ -62,170 +68,36 @@
 					<uxap:ObjectPageSubSection title="Reporte" titleUppercase="false">
 						<uxap:blocks>
 
-              <ScrollContainer>
-        
-        <Table id="idProductsTable"
-            mode="SingleSelect"
-              inset="false"
-              items="{
-                path: '/ProductCollection',
-                sorter: {
-                  path: 'Name'
-                }
-              }">
-              <columns>
-                <Column
-                  width="12em">
-                  <Text text="Número pedido cliente" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Clase de pedido" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Fecha del pedido" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Hora pedido" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Motivo de pedido" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Código destinatario" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Descripción destinatario" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Número de entrega de salida" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Número posición entrega" />
-                </Column>
-                  <Column
-                  width="12em">
-                  <Text text="Fecha doc. entrega" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Hora doc. entrega" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Número posición" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Código material" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Descripción material" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="NPF" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Unidad de medida del pedido" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Cantidad Pedida" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Moneda documento" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Importe neto pedido" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Estatus Pedido" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Cantidad confirmada" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Cantidad facturada" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Cantidad pendiente" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Importe facturado" />
-                </Column>
-                <Column
-                  width="12em">
-                  <Text text="Observaciones Pedido" />
-                </Column>
-              </columns>
-              <items>
-                <ColumnListItem>
-                  <cells>
-                    <Text
-                      text="{SupplierName}" />
-                  </cells>
-                  <cells>
-                    <Text
-                      text="{SupplierName}" />
-                  </cells>
-                  <cells>
-                    <Text
-                      text="{SupplierName}" />
-                  </cells>
-                  <cells>
-                    <Text
-                      text="{SupplierName}" />
-                  </cells>
-                  <cells>
-                    <Text
-                      text="{SupplierName}" />
-                  </cells>
-                  <cells>
-                    <Text
-                      text="{SupplierName}" />
-                  </cells>
-                  <cells>
-                    <Text
-                      text="{SupplierName}" />
-                  </cells>
-                  <cells>
-                    <Text
-                      text="{SupplierName}" />
-                  </cells>
-                  <cells>
-                    <Text
-                      text="{SupplierName}" />
-                  </cells>
-                  <cells>
-                    <Text
-                      text="{SupplierName}" />
-                  </cells>
-                  <cells>
-                    <Text
-                      text="{SupplierName}" />
-                  </cells>
-                </ColumnListItem>
-              </items>
-            </Table>
-
-          </ScrollContainer>
+              <VBox id="vbox" fitContainer="true">
+                <smartFilterBar:SmartFilterBar id="sfFacturasEstadoCuenta" entitySet="CONSULTA_FACTURASSet" persistencyKey="pksfFacturasEstadoCuenta" >
+				<smartFilterBar:controlConfiguration>
+					<smartFilterBar:ControlConfiguration key="PedidoCliente" visibleInAdvancedArea="true">
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration key="ClaseDocumento" visibleInAdvancedArea="true">
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration key="DescClaseDocumento" visibleInAdvancedArea="true">
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration key="Material" visibleInAdvancedArea="true">
+					</smartFilterBar:ControlConfiguration>
+					<smartFilterBar:ControlConfiguration key="DescMaterial" visibleInAdvancedArea="true">
+					</smartFilterBar:ControlConfiguration>
+				</smartFilterBar:controlConfiguration>	
+				</smartFilterBar:SmartFilterBar>
+                <smartTable:SmartTable id="stFacturasEstadoCuenta" beforeRebindTable="onbrtFacturasEstadoCuenta" initiallyVisibleFields="PedidoCliente,FechaDocumento,ClaseDocumento,DescClaseDocumento,MotivoPedido,DescMotivoPedido,PosicionPedido,Material,DescMaterial" entitySet="CONSULTA_FACTURASSet" smartFilterId="sfFacturasEstadoCuenta" tableType="Table" useExportToExcel="true" beforeExport="onBeforeExport" useVariantManagement="true" useTablePersonalisation="true" showRowCount="true" persistencyKey="pkstFacturasEstadoCuenta" enableAutoBinding="true" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true" editTogglable="false" app:useSmartToggle="true">
+                  <smartTable:layoutData>
+                    <FlexItemData growFactor="1" baseSize="0%"/>
+                  </smartTable:layoutData>
+				  <smartTable:customToolbar>
+					<OverflowToolbar design="Transparent">
+						<ToolbarSpacer/>
+						<OverflowToolbarButton  id="btnPdfFactura" icon="sap-icon://pdf-reader" tooltip="Ver Factura" text="Ver Factura"
+							press="onVerFactura"/>
+					</OverflowToolbar>
+				</smartTable:customToolbar>
+				  	<t:Table selectionMode="Single">
+					</t:Table>
+                </smartTable:SmartTable>
+              </VBox>
 
           	</uxap:blocks>
           </uxap:ObjectPageSubSection>

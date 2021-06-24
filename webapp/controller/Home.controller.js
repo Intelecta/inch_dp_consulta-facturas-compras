@@ -12,14 +12,7 @@ sap.ui.define([
 
 				var ZLTDBM_CONCESIONARIO_SRV = this.getOwnerComponent().getModel("ZLTDBM_CONCESIONARIO_SRV");
 
-				ZLTDBM_CONCESIONARIO_SRV.read("/facturaSet", {
-					success: function (result) {
-						console.log(result.results);
-					},
-					error: function (err) {
-						console.log(err);
-					}
-				});
+				this.byId("vbox").setModel(ZLTDBM_CONCESIONARIO_SRV);
 
 				$.ajax("user-api/currentUser", {
 					type: "GET",
