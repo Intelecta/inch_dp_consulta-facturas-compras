@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZLTDBM_CONCESIONARIO_SRV" xml:lang="es" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="DATOS_BASIC_CONTACT" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Kunnr"/>
+                </Key>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Cliente"/>
+                <Property Name="NomEmpre" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Nombre de la empresa"/>
+                <Property Name="Ciudad" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Ciudad"/>
+                <Property Name="Region" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Región"/>
+                <Property Name="Telefono" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Teléfono"/>
+                <NavigationProperty Name="SUCURSALSet" Relationship="ZLTDBM_CONCESIONARIO_SRV.DBCtoSUCURSAL" FromRole="FromRole_DBCtoSUCURSAL" ToRole="ToRole_DBCtoSUCURSAL"/>
+                <NavigationProperty Name="CONTACTOSet" Relationship="ZLTDBM_CONCESIONARIO_SRV.DBCtoCONTACTO" FromRole="FromRole_DBCtoCONTACTO" ToRole="ToRole_DBCtoCONTACTO"/>
+            </EntityType>
+            <EntityType Name="factura" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="VbelnVf"/>
+                </Key>
+                <Property Name="VbelnVf" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Factura"/>
+                <Property Name="VbelnVa" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Documento venta"/>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sociedad"/>
+                <Property Name="KunnrAg" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Solicitante"/>
+                <Property Name="KunnrRg" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Respons.de pago"/>
+                <Property Name="Bldat" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Fecha de factura AAAAMMDD"/>
+                <Property Name="Zfbdt" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Fecha de vencimiento AAAAMMDD"/>
+                <Property Name="Zterm" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Cond.pago"/>
+                <Property Name="XblnrVl" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="Referencia"/>
+                <Property Name="XblnrVf" Type="Edm.String" Nullable="false" MaxLength="16" sap:unicode="false" sap:label="Referencia"/>
+                <Property Name="Waers" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="Moneda" sap:semantics="currency-code"/>
+                <Property Name="WrbtrVf" Type="Edm.Decimal" Nullable="false" Precision="14" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="Importe"/>
+                <Property Name="WrbtrRg" Type="Edm.Decimal" Nullable="false" Precision="14" Scale="3" sap:unicode="false" sap:unit="Waers" sap:label="Importe"/>
+                <Property Name="Land1" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="País"/>
+                <Property Name="Spart" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Sector"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Estado de Pago"/>
+            </EntityType>
+            <EntityType Name="materialreemplazo" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Matnr"/>
+                </Key>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mfrpn" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Nº pieza fabric." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Maktx" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Denominación" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kondm" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Gr.materiales" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AtwrtSecuencia" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Valor caract." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AtwrtNparte" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Valor caract." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matkl" Type="Edm.String" Nullable="false" MaxLength="9" sap:unicode="false" sap:label="Grupo artículos" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Wgbez" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Denom.gr-artíc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mvgr1" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Gr.materiales 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BezeiMvgr1" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Denominación" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Txtcm" Type="Edm.String" Nullable="false" MaxLength="1000" sap:unicode="false" sap:label="Texto Comercial" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Cliente" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Werks" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Centro" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vkorg" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Organiz.ventas" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vtweg" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Canal distrib." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Sociedad" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="RED_CONCECIONARIOS" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Kunnr"/>
+                </Key>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Cliente"/>
+                <Property Name="NomEmpre" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Nombre de la empresa"/>
+                <Property Name="Ciudad" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Ciudad"/>
+                <Property Name="Region" Type="Edm.String" Nullable="false" MaxLength="60" sap:unicode="false" sap:label="Región"/>
+                <Property Name="Telefono" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Teléfono"/>
+                <NavigationProperty Name="CONTACTOSet" Relationship="ZLTDBM_CONCESIONARIO_SRV.RCtoCONTACTO" FromRole="FromRole_RCtoCONTACTO" ToRole="ToRole_RCtoCONTACTO"/>
+                <NavigationProperty Name="SUCURSALSet" Relationship="ZLTDBM_CONCESIONARIO_SRV.RCtoSUCURSAL" FromRole="FromRole_RCtoSUCURSAL" ToRole="ToRole_RCtoSUCURSAL"/>
+            </EntityType>
+            <EntityType Name="CONTACTO" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Kunnr"/>
+                </Key>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Cliente"/>
+                <Property Name="ContactoNombre" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Nombre Contacto"/>
+                <Property Name="ContactoTelefono" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Teléfono"/>
+                <Property Name="ContactoEmail" Type="Edm.String" Nullable="false" MaxLength="241" sap:unicode="false" sap:label="Dir.cor.elec."/>
+                <NavigationProperty Name="DATOS_BASIC_CONTACT" Relationship="ZLTDBM_CONCESIONARIO_SRV.DBCtoCONTACTO" FromRole="ToRole_DBCtoCONTACTO" ToRole="FromRole_DBCtoCONTACTO"/>
+                <NavigationProperty Name="RED_CONCECIONARIOS" Relationship="ZLTDBM_CONCESIONARIO_SRV.RCtoCONTACTO" FromRole="ToRole_RCtoCONTACTO" ToRole="FromRole_RCtoCONTACTO"/>
+            </EntityType>
+            <EntityType Name="SUCURSAL" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Kunnr"/>
+                </Key>
+                <Property Name="Kunnr" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Cliente"/>
+                <Property Name="SucurlasNombre" Type="Edm.String" Nullable="false" MaxLength="80" sap:unicode="false" sap:label="Sucursal"/>
+                <Property Name="SucurlasDireccion" Type="Edm.String" Nullable="false" MaxLength="71" sap:unicode="false" sap:label="SUCURLAS_DIRECCION"/>
+                <Property Name="SucurlasCiudad" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Población"/>
+                <Property Name="SucurlasRegion" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Denominación"/>
+                <NavigationProperty Name="DATOS_BASIC_CONTACT" Relationship="ZLTDBM_CONCESIONARIO_SRV.DBCtoSUCURSAL" FromRole="ToRole_DBCtoSUCURSAL" ToRole="FromRole_DBCtoSUCURSAL"/>
+                <NavigationProperty Name="RED_CONCECIONARIOS" Relationship="ZLTDBM_CONCESIONARIO_SRV.RCtoSUCURSAL" FromRole="ToRole_RCtoSUCURSAL" ToRole="FromRole_RCtoSUCURSAL"/>
+            </EntityType>
+            <EntityType Name="USUARIOS_AUTORIZADOS" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Apellido"/>
+                    <PropertyRef Name="Nombre"/>
+                    <PropertyRef Name="Modulo"/>
+                    <PropertyRef Name="ClienteSap"/>
+                </Key>
+                <Property Name="Apellido" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Apellido"/>
+                <Property Name="Nombre" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Nombre"/>
+                <Property Name="Modulo" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Modulo"/>
+                <Property Name="ClienteSap" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Cod. Cliente SAP"/>
+            </EntityType>
+            <Association Name="DBCtoSUCURSAL" sap:content-version="1">
+                <End Type="ZLTDBM_CONCESIONARIO_SRV.DATOS_BASIC_CONTACT" Multiplicity="1" Role="FromRole_DBCtoSUCURSAL"/>
+                <End Type="ZLTDBM_CONCESIONARIO_SRV.SUCURSAL" Multiplicity="*" Role="ToRole_DBCtoSUCURSAL"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_DBCtoSUCURSAL">
+                        <PropertyRef Name="Kunnr"/>
+                    </Principal>
+                    <Dependent Role="ToRole_DBCtoSUCURSAL">
+                        <PropertyRef Name="Kunnr"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="DBCtoCONTACTO" sap:content-version="1">
+                <End Type="ZLTDBM_CONCESIONARIO_SRV.DATOS_BASIC_CONTACT" Multiplicity="1" Role="FromRole_DBCtoCONTACTO"/>
+                <End Type="ZLTDBM_CONCESIONARIO_SRV.CONTACTO" Multiplicity="*" Role="ToRole_DBCtoCONTACTO"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_DBCtoCONTACTO">
+                        <PropertyRef Name="Kunnr"/>
+                    </Principal>
+                    <Dependent Role="ToRole_DBCtoCONTACTO">
+                        <PropertyRef Name="Kunnr"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="RCtoCONTACTO" sap:content-version="1">
+                <End Type="ZLTDBM_CONCESIONARIO_SRV.RED_CONCECIONARIOS" Multiplicity="1" Role="FromRole_RCtoCONTACTO"/>
+                <End Type="ZLTDBM_CONCESIONARIO_SRV.CONTACTO" Multiplicity="*" Role="ToRole_RCtoCONTACTO"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_RCtoCONTACTO">
+                        <PropertyRef Name="Kunnr"/>
+                    </Principal>
+                    <Dependent Role="ToRole_RCtoCONTACTO">
+                        <PropertyRef Name="Kunnr"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="RCtoSUCURSAL" sap:content-version="1">
+                <End Type="ZLTDBM_CONCESIONARIO_SRV.RED_CONCECIONARIOS" Multiplicity="1" Role="FromRole_RCtoSUCURSAL"/>
+                <End Type="ZLTDBM_CONCESIONARIO_SRV.SUCURSAL" Multiplicity="*" Role="ToRole_RCtoSUCURSAL"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_RCtoSUCURSAL">
+                        <PropertyRef Name="Kunnr"/>
+                    </Principal>
+                    <Dependent Role="ToRole_RCtoSUCURSAL">
+                        <PropertyRef Name="Kunnr"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZLTDBM_CONCESIONARIO_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="DATOS_BASIC_CONTACTSet" EntityType="ZLTDBM_CONCESIONARIO_SRV.DATOS_BASIC_CONTACT" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="facturaSet" EntityType="ZLTDBM_CONCESIONARIO_SRV.factura" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="materialreemplazoSet" EntityType="ZLTDBM_CONCESIONARIO_SRV.materialreemplazo" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="RED_CONCECIONARIOSSet" EntityType="ZLTDBM_CONCESIONARIO_SRV.RED_CONCECIONARIOS" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="CONTACTOSet" EntityType="ZLTDBM_CONCESIONARIO_SRV.CONTACTO" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SUCURSALSet" EntityType="ZLTDBM_CONCESIONARIO_SRV.SUCURSAL" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="USUARIOS_AUTORIZADOSSet" EntityType="ZLTDBM_CONCESIONARIO_SRV.USUARIOS_AUTORIZADOS" sap:searchable="true" sap:content-version="1"/>
+                <AssociationSet Name="DBCtoSUCURSALSet" Association="ZLTDBM_CONCESIONARIO_SRV.DBCtoSUCURSAL" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="DATOS_BASIC_CONTACTSet" Role="FromRole_DBCtoSUCURSAL"/>
+                    <End EntitySet="SUCURSALSet" Role="ToRole_DBCtoSUCURSAL"/>
+                </AssociationSet>
+                <AssociationSet Name="RCtoSUCURSALSet" Association="ZLTDBM_CONCESIONARIO_SRV.RCtoSUCURSAL" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="RED_CONCECIONARIOSSet" Role="FromRole_RCtoSUCURSAL"/>
+                    <End EntitySet="SUCURSALSet" Role="ToRole_RCtoSUCURSAL"/>
+                </AssociationSet>
+                <AssociationSet Name="DBCtoCONTACTOSet" Association="ZLTDBM_CONCESIONARIO_SRV.DBCtoCONTACTO" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="DATOS_BASIC_CONTACTSet" Role="FromRole_DBCtoCONTACTO"/>
+                    <End EntitySet="CONTACTOSet" Role="ToRole_DBCtoCONTACTO"/>
+                </AssociationSet>
+                <AssociationSet Name="RCtoCONTACTOSet" Association="ZLTDBM_CONCESIONARIO_SRV.RCtoCONTACTO" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="RED_CONCECIONARIOSSet" Role="FromRole_RCtoCONTACTO"/>
+                    <End EntitySet="CONTACTOSet" Role="ToRole_RCtoCONTACTO"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://10.9.101.71:8000/sap/opu/odata/sap/ZLTDBM_CONCESIONARIO_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://10.9.101.71:8000/sap/opu/odata/sap/ZLTDBM_CONCESIONARIO_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
