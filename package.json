@@ -10,9 +10,9 @@
     ],
     "main": "webapp/index.html",
     "scripts": {
-        "start": "fiori run --open 'index.html?sap-client=100'",
-        "start-local": "fiori run --config ./ui5-local.yaml --open 'index.html?sap-client=100'",
-        "start-noflp": "fiori run --open 'index.html?sap-client=100'",
+        "start": "fiori run --open 'index.html?sap-client=300'",
+        "start-local": "fiori run --config ./ui5-local.yaml --open 'index.html?sap-client=300'",
+        "start-noflp": "fiori run --open 'index.html?sap-client=300'",
         "build": "ui5 build -a --clean-dest --include-task=generateManifestBundle generateCachebusterInfo",
         "build2": "rimraf resources mta_archives && mbt build --mtar archive",
         "deploy": "cf deploy mta_archives/archive.mtar",

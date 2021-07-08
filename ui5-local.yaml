@@ -24,7 +24,7 @@ server:
       backend:
       - path: /sap
         url: http://10.9.101.71:8000
-        client: '100'
+        client: '300'
   - name: fiori-tools-appreload
     afterMiddleware: compression
     configuration:

@@ -12,12 +12,44 @@
         "resources": "resources.json",
         "ach": "ach",
         "dataSources": {
-            "ZLTDBM_CONCESIONARIO_SRV": {
-                "uri": "/sap/opu/odata/sap/ZLTDBM_CONCESIONARIO_SRV",
+            "ZLTDBM_UTILITARIO_SRV": {
+                "uri": "/sap/opu/odata/sap/ZLTDBM_UTILITARIO_SRV",
                 "type": "OData",
                 "settings": {
                     "odataVersion": "2.0",
                     "localUri": "localService/metadata.xml"
+                }
+            },
+            "ZLTDBM_REPUESTOS_SRV": {
+                "uri": "/sap/opu/odata/sap/ZLTDBM_REPUESTOS_SRV",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "IASUsers": {
+                "uri": "/IdentityAuthenticationService",
+                "type": "OData"
+            },
+            "UserLogged": {
+                "uri": "/user-api",
+                "type": "OData"
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "intent1": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "consultaFacturas",
+                    "action": "Display",
+                    "title": "Pedidos vs Factura de Repuestos",
+                    "info": "Repuestos",
+                    "subTitle": "Ingresar",
+                    "icon": "sap-icon://account"
                 }
             }
         }
@@ -65,9 +97,21 @@
                     "bundleName": "inch_dp_consulta-facturas-compras.i18n.i18n"
                 }
             },
-            "ZLTDBM_CONCESIONARIO_SRV": {
-                "dataSource": "ZLTDBM_CONCESIONARIO_SRV",
+            "ZLTDBM_UTILITARIO_SRV": {
+                "dataSource": "ZLTDBM_UTILITARIO_SRV",
                 "preload": true
+            },
+            "ZLTDBM_REPUESTOS_SRV": {
+                "dataSource": "ZLTDBM_REPUESTOS_SRV",
+                "preload": true
+            },
+            "IASUsers": {
+                "dataSource": "IASUsers",
+                "preload": false
+            },
+            "UserLogged": {
+                "dataSource": "UserLogged",
+                "preload": false
             }
         },
         "resources": {
