@@ -46,13 +46,11 @@ sap.ui.define([
 							localStorage.setItem("marcaPais", JSON.stringify(data));
 
 							if (data.length === 1) {
-								thes.byId("btEditarCabecera").setVisible(false);
 								var jsonModel = new sap.ui.model.json.JSONModel(data[0]);
 								thes.getView().setModel(jsonModel, "marcaPais");
 								Kondm = data[0].Kondm;
 								Land1 = data[0].Land1;
 							} else {
-								thes.byId("btEditarCabecera").setVisible(true);
 								var jsonModel = new sap.ui.model.json.JSONModel(data);
 								thes.getView().setModel(jsonModel, "marcaPais");
 								thes.onDialogoVisualizarMarcaPais();
@@ -69,13 +67,11 @@ sap.ui.define([
 						var jsonModel = new sap.ui.model.json.JSONModel(results);
 						thes.getView().setModel(jsonModel, "marcaPais");
 						if (results.length === 1) {
-							thes.byId("btEditarCabecera").setVisible(false);
 							var jsonModel = new sap.ui.model.json.JSONModel(results[0]);
 							thes.getView().setModel(jsonModel, "marcaPais");
 							Kondm = results[0].Kondm;
 							Land1 = results[0].Land1;
 						} else {
-							thes.byId("btEditarCabecera").setVisible(true);
 							thes.onDialogoVisualizarMarcaPais();
 						}
 
@@ -89,13 +85,11 @@ sap.ui.define([
 								var jsonModel = new sap.ui.model.json.JSONModel(data);
 								thes.getView().setModel(jsonModel, "marcaPais");
 								if (data.length === 1) {
-									thes.byId("btEditarCabecera").setVisible(false);
 									var jsonModel = new sap.ui.model.json.JSONModel(data[0]);
 									thes.getView().setModel(jsonModel, "marcaPais");
 									Kondm = data[0].Kondm;
 									Land1 = data[0].Land1;
 								} else {
-									thes.byId("btEditarCabecera").setVisible(true);
 									thes.onDialogoVisualizarMarcaPais();
 								}
 							},

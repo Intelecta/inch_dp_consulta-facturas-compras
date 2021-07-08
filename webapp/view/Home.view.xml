@@ -59,11 +59,7 @@
 				<smartFilterBar:controlConfiguration>
 					<smartFilterBar:ControlConfiguration key="Npf" visibleInAdvancedArea="true">
 					</smartFilterBar:ControlConfiguration>
-					<smartFilterBar:ControlConfiguration key="FechaDocumento" visibleInAdvancedArea="true">
-					<smartFilterBar:defaultFilterValues>
-						<smartFilterBar:SelectOption low="{rangoFecha>/fechaIni}" high="{rangoFecha>/fechaHoy}" operator="BT" sign="I">
-						</smartFilterBar:SelectOption>
-					</smartFilterBar:defaultFilterValues>
+					<smartFilterBar:ControlConfiguration key="FechaDocumento" visibleInAdvancedArea="true" mandatory="true">
 					</smartFilterBar:ControlConfiguration>
 					<smartFilterBar:ControlConfiguration key="DescClaseDocumento" visibleInAdvancedArea="true">
 					</smartFilterBar:ControlConfiguration>
