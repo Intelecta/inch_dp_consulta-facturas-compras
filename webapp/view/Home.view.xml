@@ -77,13 +77,27 @@
 				    <smartFilterBar:ControlConfiguration key="Npf" visibleInAdvancedArea="true">
 					</smartFilterBar:ControlConfiguration>			
 					<smartFilterBar:ControlConfiguration key="FechaDocumento" visibleInAdvancedArea="true" mandatory="mandatory">
-					</smartFilterBar:ControlConfiguration>	
-					<smartFilterBar:ControlConfiguration key="DescClaseDocumento" visibleInAdvancedArea="true">
-					</smartFilterBar:ControlConfiguration>				
+					</smartFilterBar:ControlConfiguration>						
 					<smartFilterBar:ControlConfiguration key="PedidoCliente" visibleInAdvancedArea="true">
 					</smartFilterBar:ControlConfiguration>
 					<smartFilterBar:ControlConfiguration key="NumeroFactura" visibleInAdvancedArea="true">
 					</smartFilterBar:ControlConfiguration>
+					 <smartFilterBar:ControlConfiguration key="ClaseDocumento" visibleInAdvancedArea="true">
+                     <smartFilterBar:customControl>
+                     <Select id="clspedidoList" 
+                     items="{path: '/aclspedido'}">
+                     <core:ListItem key="{Auart}" text="{Auart} - {Bezei}"/>                   
+                     </Select>
+                   </smartFilterBar:customControl>
+                  </smartFilterBar:ControlConfiguration> 
+				   <smartFilterBar:ControlConfiguration key="EstatusPago" visibleInAdvancedArea="true" label="Estado pedido">
+                   <smartFilterBar:customControl>
+                    <Select id="idEstatus" 
+                    items="{path: '/aEstatus'}">
+                    <core:ListItem key="{Domvalue}" text="{Ddtext}" />                   
+                   </Select>
+                   </smartFilterBar:customControl>
+                  </smartFilterBar:ControlConfiguration>
 				</smartFilterBar:controlConfiguration>	
 				</smartFilterBar:SmartFilterBar>
                 <smartTable:SmartTable id="stconsultaFacturas" beforeRebindTable="onbrtconsultaFacturas" 

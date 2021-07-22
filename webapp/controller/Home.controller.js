@@ -24,11 +24,10 @@ sap.ui.define([
 				ZLTDBM_UTILITARIO_SRV = this.getOwnerComponent().getModel("ZLTDBM_UTILITARIO_SRV");
 				ZLTDBM_REPUESTOS_SRV = this.getOwnerComponent().getModel("ZLTDBM_REPUESTOS_SRV");
 				this.byId("vbox").setModel(ZLTDBM_REPUESTOS_SRV);				
-				this.obtenerUsuarioLogueado();
-				//this.obtenerMarcaPais();
+				this.obtenerUsuarioLogueado();				
 				that.onObtenerMarca();   
                 that.onGetDealer();
-				
+				that.onGetEstadopedidos();
 			},
 			obtenerMarcaPais: function (flag) {
 
@@ -180,12 +179,23 @@ sap.ui.define([
 
 			onbrtconsultaFacturas: function (oEvent) {
 				var filters = [];
+				var estatuskey = this.getView().byId("idEstatus").getSelectedKey();
+				var clspedidokey = this.getView().byId("clspedidoList").getSelectedKey();
+				if(estatuskey!=""){
+				var Estatus = new sap.ui.model.Filter("Estatus", sap.ui.model.FilterOperator.EQ, estatuskey);
+				filters.push(Estatus);
+				}
+				if(clspedidokey!=""){
+				var clspedido = new sap.ui.model.Filter("ClaseDocumento", sap.ui.model.FilterOperator.EQ, clspedidokey);
+				filters.push(clspedido);
+				}
 				var filter = new sap.ui.model.Filter("Kondm", sap.ui.model.FilterOperator.EQ, DataMarca[0].Kondm.trim());
 				filters.push(filter);
 				var filter = new sap.ui.model.Filter("Land1", sap.ui.model.FilterOperator.EQ, DataMarca[0].Land1.trim());
 				filters.push(filter);                
 				var binding = oEvent.getParameter("bindingParams");
-				binding.filters = binding.filters.concat(filters);				
+				binding.filters = binding.filters.concat(filters);
+								
 			},
 
 			hexToBase64: function (hexstring) {
@@ -257,6 +267,7 @@ sap.ui.define([
                         that.byId("idMarca").setModel(jsonModelMarcaPais); 
                         var jsonModel = new sap.ui.model.json.JSONModel(aResults[0]);	
 						that.getView().setModel(jsonModel, "datoMarca");
+						that.onGetclasepedidos();
                         }
                         else{
                             var message = "Estimado" +" " +thes.byId("tNamefb").getText() +" " +"usted no cuenta con marcas asociadas";                                                      
@@ -415,7 +426,8 @@ sap.ui.define([
                 var collection = []; 
                 collection.push(obj);
                 that.getView().setModel(new JsonModel(collection), "DataMarca");
-				DataMarca = that.getView().getModel("DataMarca").getData();                                     
+				DataMarca = that.getView().getModel("DataMarca").getData(); 
+				that.onGetclasepedidos();                                    
             },
             fnabrirdialogmensaje: function (message) {
                 var Dialogo = new sap.m.Dialog({
@@ -437,6 +449,38 @@ sap.ui.define([
                 }));                
                 Dialogo.open();
             },
+			onGetEstadopedidos: function(){		
+				ZLTDBM_UTILITARIO_SRV.read("/Estatus_pedidoSet", {					
+					success: function (result) {
+					var oDatos = {};
+				    oDatos.aEstatus =  result.results;
+				    var jsonModel = new sap.ui.model.json.JSONModel(oDatos);
+				    that.byId("idEstatus").setModel(jsonModel);						 										
+					},
+					error: function (err) {
+	
+					}
+				});
+			},
+			onGetclasepedidos: function(){				
+				var filters = [];								
+				var Land1 = new sap.ui.model.Filter("Land1", sap.ui.model.FilterOperator.EQ, DataMarca[0].Land1.trim());
+				var Kondm = new sap.ui.model.Filter("Kondm", sap.ui.model.FilterOperator.EQ, DataMarca[0].Kondm.trim());
+				filters.push(Land1);
+				filters.push(Kondm);			
+				ZLTDBM_REPUESTOS_SRV.read("/CLASE_PEDSet", {	
+					filters: filters,				
+					success: function (result) {			
+				    var oDatos = {};
+				    oDatos.aclspedido =  result.results;
+				    var jsonModel = new sap.ui.model.json.JSONModel(oDatos);
+				    that.byId("clspedidoList").setModel(jsonModel);																																	
+					},
+					error: function (err) {
 
+					}
+				});
+
+			}
 		});
 	});
