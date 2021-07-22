@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+	    id="dealers"
+		title="Dealers"
+		class="sapUiPopupWithPadding"
+		items="{/aDealers}"
+		search="onBuscarDealer"
+		liveChange="onBuscarDealer"
+		confirm="onCerrarMatchCodeDealer"
+		cancel="onCerrarMatchCodeDealer">
+		<StandardListItem
+			iconDensityAware="false"
+			iconInset="false"
+			title="{Partner}"
+			description="{NamePartner}" />
+	</SelectDialog>
+</core:FragmentDefinition>

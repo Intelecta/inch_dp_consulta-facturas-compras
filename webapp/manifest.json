@@ -44,7 +44,7 @@
                         "parameters": {},
                         "additionalParameters": "allowed"
                     },
-                    "semanticObject": "consultaFacturas",
+                    "semanticObject": "consultaFacturasR",
                     "action": "Display",
                     "title": "Pedidos vs Factura de Repuestos",
                     "info": "Repuestos",

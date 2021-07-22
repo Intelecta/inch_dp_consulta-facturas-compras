@@ -6,10 +6,11 @@
   xmlns="sap.m"
   xmlns:mvc="sap.ui.core.mvc"
   xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
-	xmlns:smartTable="sap.ui.comp.smarttable"
-	xmlns:html="http://www.w3.org/1999/xhtml"
-	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
-	xmlns:t="sap.ui.table">
+  xmlns:smartTable="sap.ui.comp.smarttable"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+  xmlns:t="sap.ui.table"
+  xmlns:core="sap.ui.core">
   <App id="idAppControl" >
     <pages>
       <Page title="{i18n>title}">
@@ -18,35 +19,51 @@
 	<uxap:headerTitle>
 	<uxap:ObjectPageDynamicHeaderTitle>
 			<uxap:expandedHeading>
-				<Title id="tNamefb" wrapping="true"/>
+			<FlexBox fitContainer="true" alignItems="Center">
+			<Avatar src="sap-icon://manager-insight" backgroundColor="Random" displaySize="L" class="sapUiTinyMarginEnd"/>
+             <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">	
+             <ObjectStatus id="tNamefb"    text="Desconocido" wrapping="true" class="UserName"/>	
+			 <ObjectStatus title="País"    text="{datoMarca>/Land1} - {datoMarca>/Landx}"/>	
+			 <ObjectStatus title="Marca"   text="{datoMarca>/VtextKondm}"/>
+			 <ObjectStatus title="Cliente" text="{datoDealerCab>/Partner} - {datoDealerCab>/NamePartner}"/>						
+			</layout:VerticalLayout>
+			</FlexBox>			
 			</uxap:expandedHeading>
 
 			<uxap:snappedHeading>
-				<FlexBox fitContainer="true" alignItems="Center">
-					<Avatar src="sap-icon://business-card" backgroundColor="Random" class="sapUiTinyMarginEnd"/>
-					<Title id="tName" wrapping="true" />
-				</FlexBox>
+				<FlexBox fitContainer="true" alignItems="Center">				
+					<Avatar src="sap-icon://manager-insight" backgroundColor="Random" class="sapUiTinyMarginEnd"/>
+					<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+					<ObjectStatus id="tName"    text="Desconocido" wrapping="true" />					
+					<ObjectStatus title="Cliente" text="{datoDealerCab>/Partner} - {datoDealerCab>/NamePartner}"/>	
+				</layout:VerticalLayout>
+				</FlexBox>				
 			</uxap:snappedHeading>
 
 			<uxap:actions>
-				<Button id="btEditarCabecera" text="Editar" press="onEditarCabecera"/>
+			  <Label text="Cliente" />
+			  <Input id="idDealers" type="Text" showSuggestion="true" showValueHelp="true" valueHelpRequest="onMostrarDealers"
+			  suggestionItems="{/aDealers}" change="onLeaveMatchCodeDealer" width="15rem">
+			  <suggestionItems>
+			  	<core:Item text="{Partner} - {NamePartner}"/>
+			  </suggestionItems>
+			  </Input>
+			   <Label text="Marca"/>
+			  <Select		
+			      change="onchangeMarcaPais"
+			      width="12rem"						    
+                  id="idMarca"
+			  	showSecondaryValues= "true"
+			  	items="{
+			  		path: '/aMarcasPais'										
+			  	}">
+			  	<core:Item key="{Land1} - {Landx} - {Kondm} - {VtextKondm}" text="{VtextKondm} - {Landx}"/>
+			  </Select>				
 			</uxap:actions>
 
 		</uxap:ObjectPageDynamicHeaderTitle>
 		
 	</uxap:headerTitle>
-
-	<uxap:headerContent>
-				<FlexBox wrap="Wrap">
-					<Avatar src="sap-icon://business-card" backgroundColor="Random" displaySize="L" class="sapUiTinyMarginEnd"/>
-
-					<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
-						<ObjectStatus title="País" text="{marcaPais>/Land1} - {marcaPais>/Landx}"/>
-						<ObjectStatus title="Marca" text="{marcaPais>/Kondm} - {marcaPais>/VtextKondm}"/>
-					</layout:VerticalLayout>
-
-				</FlexBox>
-			</uxap:headerContent>
 
 			<uxap:sections>
 			<uxap:ObjectPageSection>
@@ -57,19 +74,20 @@
               <VBox id="vbox" fitContainer="true">
                 <smartFilterBar:SmartFilterBar id="sfconsultaFacturas" showFilterConfiguration="false"  entitySet="CONSULTA_FACTURASSet" persistencyKey="pksfconsultaFacturas" >
 				<smartFilterBar:controlConfiguration>
-					<smartFilterBar:ControlConfiguration key="Npf" visibleInAdvancedArea="true">
-					</smartFilterBar:ControlConfiguration>
+				    <smartFilterBar:ControlConfiguration key="Npf" visibleInAdvancedArea="true">
+					</smartFilterBar:ControlConfiguration>			
 					<smartFilterBar:ControlConfiguration key="FechaDocumento" visibleInAdvancedArea="true" mandatory="mandatory">
-					</smartFilterBar:ControlConfiguration>
+					</smartFilterBar:ControlConfiguration>	
 					<smartFilterBar:ControlConfiguration key="DescClaseDocumento" visibleInAdvancedArea="true">
-					</smartFilterBar:ControlConfiguration>
+					</smartFilterBar:ControlConfiguration>				
 					<smartFilterBar:ControlConfiguration key="PedidoCliente" visibleInAdvancedArea="true">
 					</smartFilterBar:ControlConfiguration>
 					<smartFilterBar:ControlConfiguration key="NumeroFactura" visibleInAdvancedArea="true">
 					</smartFilterBar:ControlConfiguration>
 				</smartFilterBar:controlConfiguration>	
 				</smartFilterBar:SmartFilterBar>
-                <smartTable:SmartTable id="stconsultaFacturas" beforeRebindTable="onbrtconsultaFacturas" initiallyVisibleFields="PedidoCliente,FechaDocumento,ClaseDocumento,DescClaseDocumento,MotivoPedido,DescMotivoPedido,PosicionPedido,Material,DescMaterial,Npf,Um,CantidadDocumento,ImporteNeto,Moneda,NumeroFactura,FechaFactura,PosFactura,Cantidad,Importe,FechaVencimiento" requestAtLeastFields="LinkPdf" entitySet="CONSULTA_FACTURASSet" smartFilterId="sfconsultaFacturas" tableType="Table" useExportToExcel="true" beforeExport="onBeforeExport" useVariantManagement="true" useTablePersonalisation="true" showRowCount="true" persistencyKey="pkstconsultaFacturas" enableAutoBinding="false" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true" editTogglable="false" app:useSmartToggle="true">
+                <smartTable:SmartTable id="stconsultaFacturas" beforeRebindTable="onbrtconsultaFacturas" 
+				initiallyVisibleFields="PedidoCliente,FechaDocumento,ClaseDocumento,DescClaseDocumento,MotivoPedido,DescMotivoPedido,PosicionPedido,Material,DescMaterial,Npf,Um,CantidadDocumento,ImporteNeto,Moneda,NumeroFactura,FechaFactura,PosFactura,Cantidad,Importe,FechaVencimiento" requestAtLeastFields="LinkPdf" entitySet="CONSULTA_FACTURASSet" smartFilterId="sfconsultaFacturas" tableType="Table" useExportToExcel="true" beforeExport="onBeforeExport" useVariantManagement="true" useTablePersonalisation="true" showRowCount="true" persistencyKey="pkstconsultaFacturas" enableAutoBinding="false" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true" editTogglable="false" app:useSmartToggle="true">
                   <smartTable:layoutData>
                     <FlexItemData growFactor="1" baseSize="0%"/>
                   </smartTable:layoutData>
