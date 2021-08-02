@@ -99,11 +99,17 @@
             },
             "ZLTDBM_UTILITARIO_SRV": {
                 "dataSource": "ZLTDBM_UTILITARIO_SRV",
-                "preload": true
+                "preload": true,
+                "settings": {
+                    "defaultCountMode": "InlineRepeat"
+                   } 
             },
             "ZLTDBM_REPUESTOS_SRV": {
                 "dataSource": "ZLTDBM_REPUESTOS_SRV",
-                "preload": true
+                "preload": true,
+                "settings": {
+                    "defaultCountMode": "InlineRepeat"
+                   } 
             },
             "IASUsers": {
                 "dataSource": "IASUsers",

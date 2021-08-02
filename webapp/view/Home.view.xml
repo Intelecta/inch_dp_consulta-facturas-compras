@@ -90,7 +90,7 @@
                      </Select>
                    </smartFilterBar:customControl>
                   </smartFilterBar:ControlConfiguration> 
-				   <smartFilterBar:ControlConfiguration key="EstatusPago" visibleInAdvancedArea="true" label="Estado pedido">
+				   <smartFilterBar:ControlConfiguration key="Estatus" visibleInAdvancedArea="true" label="Estado pedido">
                    <smartFilterBar:customControl>
                     <Select id="idEstatus" 
                     items="{path: '/aEstatus'}">
@@ -101,7 +101,7 @@
 				</smartFilterBar:controlConfiguration>	
 				</smartFilterBar:SmartFilterBar>
                 <smartTable:SmartTable id="stconsultaFacturas" beforeRebindTable="onbrtconsultaFacturas" 
-				initiallyVisibleFields="PedidoCliente,FechaDocumento,ClaseDocumento,DescClaseDocumento,MotivoPedido,DescMotivoPedido,PosicionPedido,Material,DescMaterial,Npf,Um,CantidadDocumento,ImporteNeto,Moneda,NumeroFactura,FechaFactura,PosFactura,Cantidad,Importe,FechaVencimiento" requestAtLeastFields="LinkPdf" entitySet="CONSULTA_FACTURASSet" smartFilterId="sfconsultaFacturas" tableType="Table" useExportToExcel="true" beforeExport="onBeforeExport" useVariantManagement="true" useTablePersonalisation="true" showRowCount="true" persistencyKey="pkstconsultaFacturas" enableAutoBinding="false" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true" editTogglable="false" app:useSmartToggle="true">
+				initiallyVisibleFields="PedidoCliente,FechaDocumento,ClaseDocumento,DescClaseDocumento,MotivoPedido,DescMotivoPedido,PosicionPedido,Material,DescMaterial,Npf,Um,CantidadDocumento,EstatusTxt,ImporteNeto,Moneda,NumeroFactura,FechaFactura,PosFactura,Cantidad,Importe,FechaVencimiento,EstatusPago" requestAtLeastFields="LinkPdf" entitySet="CONSULTA_FACTURASSet" smartFilterId="sfconsultaFacturas" tableType="Table" useExportToExcel="true" beforeExport="onBeforeExport" useVariantManagement="true" useTablePersonalisation="true" showRowCount="true" persistencyKey="pkstconsultaFacturas" enableAutoBinding="false" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true" editTogglable="false" app:useSmartToggle="true">
                   <smartTable:layoutData>
                     <FlexItemData growFactor="1" baseSize="0%"/>
                   </smartTable:layoutData>
