@@ -17,6 +17,7 @@ sap.ui.define([
 		var Land1;
 		var AppId = "0001";
 		var DataMarca;
+		var Partner = "";
 		return Controller.extend("inch_dp_consulta-facturas-compras.controller.Home", {
 			onInit: function () {
 				that = this;
@@ -189,6 +190,10 @@ sap.ui.define([
 				var clspedido = new sap.ui.model.Filter("ClaseDocumento", sap.ui.model.FilterOperator.EQ, clspedidokey);
 				filters.push(clspedido);
 				}
+				if(Partner !=""){
+				var kunnr = new sap.ui.model.Filter("Kunnr", sap.ui.model.FilterOperator.EQ, Partner);
+				filters.push(kunnr);	
+				}
 				var filter = new sap.ui.model.Filter("Kondm", sap.ui.model.FilterOperator.EQ, DataMarca[0].Kondm.trim());
 				filters.push(filter);
 				var filter = new sap.ui.model.Filter("Land1", sap.ui.model.FilterOperator.EQ, DataMarca[0].Land1.trim());
@@ -297,15 +302,15 @@ sap.ui.define([
             onGetDealer: function(){				
 				ZLTDBM_UTILITARIO_SRV.read("/DealerSet", {							
 					success: function (result) {					
-					if(result.results.length>0){
-                        	
+					if(result.results.length>0){                        	
 						var Dealerarray = that.onDeleteDealerRepeated(result.results);
                         var oDatos = {};
                         oDatos.aDealers = Dealerarray;
                         var jsonModel = new sap.ui.model.json.JSONModel(Dealerarray[0]);
                         var jsonModelMatchCode = new sap.ui.model.json.JSONModel(oDatos);                       
                         that.getView().setModel(jsonModelMatchCode, "aDealers");  
-                        var Dealer = Dealerarray[0].Partner + " " + "-" + " " + Dealerarray[0].NamePartner;                        
+                        var Dealer = Dealerarray[0].Partner + " " + "-" + " " + Dealerarray[0].NamePartner;
+						Partner =   Dealerarray[0].Partner;                      
 						if (Dealerarray.length == 1) {
 							that.byId("idDealers").setEnabled(false);                            
 						}
@@ -392,6 +397,7 @@ sap.ui.define([
 					that.byId("idDealers").setValueState("None");
 					that.byId("idDealers").setValueStateText("");
                     var dealer = { "Partner": oSelectedItem.getTitle()  , "NamePartner":oSelectedItem.getDescription() }
+					Partner = oSelectedItem.getTitle();
                     var jsonModel = new sap.ui.model.json.JSONModel(dealer);
                     that.getView().setModel(jsonModel, "datoDealerCab");
                    
