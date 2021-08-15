@@ -86,7 +86,7 @@
                      <smartFilterBar:customControl>
                      <Select id="clspedidoList" 
                      items="{path: '/aclspedido'}">
-                     <core:ListItem key="{Auart}" text="{Auart} - {Bezei}"/>                   
+                     <core:ListItem key="{Auart}" text="{Bezei}"/>                   
                      </Select>
                    </smartFilterBar:customControl>
                   </smartFilterBar:ControlConfiguration> 
