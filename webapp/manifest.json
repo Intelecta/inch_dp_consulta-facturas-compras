@@ -101,14 +101,14 @@
                 "dataSource": "ZLTDBM_UTILITARIO_SRV",
                 "preload": true,
                 "settings": {
-                    "defaultCountMode": "InlineRepeat"
+                    "defaultCountMode": "Inline"
                    } 
             },
             "ZLTDBM_REPUESTOS_SRV": {
                 "dataSource": "ZLTDBM_REPUESTOS_SRV",
                 "preload": true,
                 "settings": {
-                    "defaultCountMode": "InlineRepeat"
+                    "defaultCountMode": "Inline"
                    } 
             },
             "IASUsers": {
