@@ -20,23 +20,13 @@
 	<uxap:ObjectPageDynamicHeaderTitle>
 			<uxap:expandedHeading>
 			<FlexBox fitContainer="true" alignItems="Center">
-			<Avatar src="sap-icon://manager-insight" backgroundColor="Random" displaySize="L" class="sapUiTinyMarginEnd"/>
-             <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">	
-             <ObjectStatus id="tNamefb"    text="Desconocido" wrapping="true" class="UserName"/>	
-			 <ObjectStatus title="País"    text="{datoMarca>/Land1} - {datoMarca>/Landx}"/>	
-			 <ObjectStatus title="Marca"   text="{datoMarca>/VtextKondm}"/>
-			 <ObjectStatus title="Cliente" text="{datoDealerCab>/Partner} - {datoDealerCab>/NamePartner}"/>						
-			</layout:VerticalLayout>
+			 <Title  id="tNamefb" text="Desconocido" wrapping="true" class="UserName"/>		
 			</FlexBox>			
 			</uxap:expandedHeading>
 
 			<uxap:snappedHeading>
-				<FlexBox fitContainer="true" alignItems="Center">				
-					<Avatar src="sap-icon://manager-insight" backgroundColor="Random" class="sapUiTinyMarginEnd"/>
-					<layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
-					<ObjectStatus id="tName"    text="Desconocido" wrapping="true" />					
-					<ObjectStatus title="Cliente" text="{datoDealerCab>/Partner} - {datoDealerCab>/NamePartner}"/>	
-				</layout:VerticalLayout>
+				<FlexBox fitContainer="true" alignItems="Center">	
+				   <Title  id="tName" text="Desconocido" wrapping="true" class="UserName"/>				
 				</FlexBox>				
 			</uxap:snappedHeading>
 
