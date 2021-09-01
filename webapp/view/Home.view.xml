@@ -47,7 +47,7 @@
 			  	items="{
 			  		path: '/aMarcasPais'										
 			  	}">
-			  	<core:Item key="{Land1} - {Landx} - {Kondm} - {VtextKondm}" text="{VtextKondm} - {Landx}"/>
+			  	<core:Item key="{Land1} - {Landx} - {Kondm} - {VtextKondm}" text="{Landx}"/>
 			  </Select>				
 			</uxap:actions>
 
