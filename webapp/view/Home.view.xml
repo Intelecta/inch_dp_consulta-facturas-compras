@@ -33,7 +33,7 @@
 			<uxap:actions>
 			  <Label text="Cliente" />
 			  <Input id="idDealers" type="Text" showSuggestion="true" showValueHelp="true" valueHelpRequest="onMostrarDealers"
-			  suggestionItems="{/aDealers}" change="onLeaveMatchCodeDealer" width="15rem">
+			  suggestionItems="{/aDealers}" change="onLeaveMatchCodeDealer" width="22rem">
 			  <suggestionItems>
 			  	<core:Item text="{Partner} - {NamePartner}"/>
 			  </suggestionItems>
