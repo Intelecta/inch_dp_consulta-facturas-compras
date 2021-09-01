@@ -83,7 +83,7 @@
 				</smartFilterBar:controlConfiguration>	
 				</smartFilterBar:SmartFilterBar>
                 <smartTable:SmartTable id="stconsultaFacturas" beforeRebindTable="onbrtconsultaFacturas" 
-				initiallyVisibleFields="PedidoCliente,FechaDocumento,ClaseDocumento,DescClaseDocumento,MotivoPedido,DescMotivoPedido,PosicionPedido,Material,DescMaterial,Npf,Um,CantidadDocumento,EstatusTxt,ImporteNeto,Moneda,NumeroFactura,NumeroFolio,FechaFactura,PosFactura,Cantidad,Importe,PrecioUnitario,SubTotal,Descuentos,PorcentajeDescuentos,Recargo,FechaVencimiento,EstatusPago" 
+				initiallyVisibleFields="PedidoCliente,FechaDocumento,ClaseDocumento,DescClaseDocumento,MotivoPedido,DescMotivoPedido,PosicionPedido,Material,DescMaterial,Npf,Um,CantidadDocumento,EstatusTxt,ImporteNeto,Moneda,NumeroFactura,NumeroFolio,FechaFactura,PosFactura,Cantidad,Importe,PrecioUnitario,Descuentos,Recargo,SubTotal,Impuesto,FechaVencimiento,EstatusPago" 
 				requestAtLeastFields="LinkPdf" 
 				entitySet="CONSULTA_FACTURASSet" 
 				smartFilterId="sfconsultaFacturas" 

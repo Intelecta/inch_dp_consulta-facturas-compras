@@ -472,8 +472,10 @@ sap.ui.define([
 				var filters = [];								
 				var Land1 = new sap.ui.model.Filter("Land1", sap.ui.model.FilterOperator.EQ, DataMarca[0].Land1.trim());
 				var Kondm = new sap.ui.model.Filter("Kondm", sap.ui.model.FilterOperator.EQ, DataMarca[0].Kondm.trim());
+				var App = new sap.ui.model.Filter("App", sap.ui.model.FilterOperator.EQ, "CF" );
 				filters.push(Land1);
-				filters.push(Kondm);			
+				filters.push(Kondm);	
+				filters.push(App);		
 				ZLTDBM_REPUESTOS_SRV.read("/CLASE_PEDSet", {	
 					filters: filters,				
 					success: function (result) {			
