@@ -25,9 +25,19 @@
                 "type": "OData",
                 "settings": {
                     "odataVersion": "2.0",
-                    "localUri": "localService/metadata.xml"
+                    "localUri": "localService/metadata.xml",
+                    "annotations": [
+						"annotation"                        
+					]
                 }
             },
+            "annotation": {
+				"type": "ODataAnnotation",
+				"uri": "annotation.xml",
+				"settings": {
+					"localUri": "annotation.xml"
+				}
+			},
             "IASUsers": {
                 "uri": "/IdentityAuthenticationService",
                 "type": "OData"
