@@ -212,6 +212,7 @@ sap.ui.define([
 			},
 
 			onVerFactura: function (oEvent) {
+				sap.ui.core.BusyIndicator.show();
 				var filters = [];
 				var indices = this.byId("stconsultaFacturas").getTable().getSelectedIndices();
 				if (indices.length === 0) {
@@ -245,10 +246,12 @@ sap.ui.define([
 							'</title><body style="margin-top:0px; margin-left: 0px; margin-right: 0px; margin-bottom: 0px;">');
 						win.document.write(objbuilder);
 						win.document.write('</body></html>');  
-						}                                             											
+						}        
+						sap.ui.core.BusyIndicator.hide();                                      											
 					},
 					error: function (err) {
-	                   
+						sap.m.MessageToast.show("No se ha podido obtener la factura");
+						sap.ui.core.BusyIndicator.hide();
 					}
 				});				
 			},
