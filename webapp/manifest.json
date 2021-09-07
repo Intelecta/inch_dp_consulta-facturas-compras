@@ -20,6 +20,14 @@
                     "localUri": "localService/metadata.xml"
                 }
             },
+            "ZLTDBM_CONCESIONARIO_SRV": {
+                "uri": "/sap/opu/odata/sap/ZLTDBM_CONCESIONARIO_SRV",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
             "ZLTDBM_REPUESTOS_SRV": {
                 "uri": "/sap/opu/odata/sap/ZLTDBM_REPUESTOS_SRV",
                 "type": "OData",
@@ -120,6 +128,10 @@
                 "settings": {
                     "defaultCountMode": "Inline"
                    } 
+            },
+            "ZLTDBM_CONCESIONARIO_SRV": {
+                "dataSource": "ZLTDBM_CONCESIONARIO_SRV",
+                "preload": true
             },
             "IASUsers": {
                 "dataSource": "IASUsers",

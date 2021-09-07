@@ -12,10 +12,11 @@ sap.ui.define([
 		"use strict";
 		var ZLTDBM_UTILITARIO_SRV;
 		var ZLTDBM_REPUESTOS_SRV;
+		var ZLTDBM_CONCESIONARIO_SRV;
 		var that,oThisView;
 		var Kondm;
 		var Land1;
-		var AppId = "0001";
+		var AppId = "0002";
 		var DataMarca;
 		var Partner = "";
 		return Controller.extend("inch_dp_consulta-facturas-compras.controller.Home", {
@@ -24,6 +25,7 @@ sap.ui.define([
 				oThisView = that.getView();
 				ZLTDBM_UTILITARIO_SRV = this.getOwnerComponent().getModel("ZLTDBM_UTILITARIO_SRV");
 				ZLTDBM_REPUESTOS_SRV = this.getOwnerComponent().getModel("ZLTDBM_REPUESTOS_SRV");
+				ZLTDBM_CONCESIONARIO_SRV = this.getOwnerComponent().getModel("ZLTDBM_CONCESIONARIO_SRV");
 				this.byId("vbox").setModel(ZLTDBM_REPUESTOS_SRV);				
 				this.obtenerUsuarioLogueado();				
 				that.onObtenerMarca();   
@@ -210,36 +212,45 @@ sap.ui.define([
 			},
 
 			onVerFactura: function (oEvent) {
-
+				var filters = [];
 				var indices = this.byId("stconsultaFacturas").getTable().getSelectedIndices();
-
 				if (indices.length === 0) {
 					return;
 				}
-
 				var reg = this.byId("stconsultaFacturas").getTable().getContextByIndex(indices[0]).getProperty();
-
-
-				if (!reg.LinkPdf) {
+				if (!reg.NumeroFactura) {
 					return;
 				}
-
-				var datos = this.hexToBase64(reg.LinkPdf);
-				var objbuilder = '';
-				objbuilder += ('<object width="100%" height="100%" data="data:application/pdf;base64,');
-				objbuilder += (datos);
-				objbuilder += ('" type="application/pdf" class="internal">');
-				objbuilder += ('<embed src="data:application/pdf;base64,');
-				objbuilder += (datos);
-				objbuilder += ('" type="application/pdf" />');
-				objbuilder += ('</object>');
-				var win = window.open("#", "_blank");
-				var title = "PDF";
-				win.document.write('<html><title>' + title +
-					'</title><body style="margin-top:0px; margin-left: 0px; margin-right: 0px; margin-bottom: 0px;">');
-				win.document.write(objbuilder);
-				win.document.write('</body></html>');
-
+				var factura = new sap.ui.model.Filter("NumeroFactura", sap.ui.model.FilterOperator.EQ, reg.NumeroFactura);
+				filters.push(factura);
+				ZLTDBM_CONCESIONARIO_SRV.read("/PDFSet", {	
+					filters: filters,		
+					success: function (result) {
+						if(result.results.length > 0){	
+						if(!result.results[0].LinkPdf){
+							return;
+						}						
+						var datos = that.hexToBase64(result.results[0].LinkPdf);
+						var objbuilder = '';
+						objbuilder += ('<object width="100%" height="100%" data="data:application/pdf;base64,');
+						objbuilder += (datos);
+						objbuilder += ('" type="application/pdf" class="internal">');
+						objbuilder += ('<embed src="data:application/pdf;base64,');
+						objbuilder += (datos);
+						objbuilder += ('" type="application/pdf" />');
+						objbuilder += ('</object>');
+						var win = window.open("#", "_blank");
+						var title = "PDF";
+						win.document.write('<html><title>' + title +
+							'</title><body style="margin-top:0px; margin-left: 0px; margin-right: 0px; margin-bottom: 0px;">');
+						win.document.write(objbuilder);
+						win.document.write('</body></html>');  
+						}                                             											
+					},
+					error: function (err) {
+	                   
+					}
+				});				
 			},
 			onSeleccionarDatosMarca: function(){				
 				var indices = that.byId("tbDatosMarca").getSelectedIndices();
@@ -328,7 +339,7 @@ sap.ui.define([
 				});
 			},
 			onDeleteDealerRepeated: function (aResults) {	
-				// AppId = 0001 ID para el portal de Inicio										
+				// AppId = 0002 ID para el portal de Repuestos										
 				var aResultsAux = [];
 				var isFound;				
 				$.each(aResults, (idx, value) => {				
