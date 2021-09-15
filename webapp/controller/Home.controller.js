@@ -19,6 +19,7 @@ sap.ui.define([
 		var AppId = "0002";
 		var DataMarca;
 		var Partner = "";
+		var MarcaConfig;
 		return Controller.extend("inch_dp_consulta-facturas-compras.controller.Home", {
 			onInit: function () {
 				that = this;
@@ -27,10 +28,29 @@ sap.ui.define([
 				ZLTDBM_REPUESTOS_SRV = this.getOwnerComponent().getModel("ZLTDBM_REPUESTOS_SRV");
 				ZLTDBM_CONCESIONARIO_SRV = this.getOwnerComponent().getModel("ZLTDBM_CONCESIONARIO_SRV");
 				this.byId("vbox").setModel(ZLTDBM_REPUESTOS_SRV);				
-				this.obtenerUsuarioLogueado();				
-				that.onObtenerMarca();   
+				this.obtenerUsuarioLogueado();			   
                 that.onGetDealer();
+				that.onGetMarcaPortal();	
 				//that.onGetEstadopedidos();
+			},
+			onGetMarcaPortal: function(){
+			    var URLbase = window.location.origin;
+				var URLComplemento = window.location.search.split("&")[0];
+                var Urlfull = URLbase + '/SITE' + URLComplemento;
+			    var filters = [];								
+				var Url = new sap.ui.model.Filter("Url", sap.ui.model.FilterOperator.EQ, Urlfull.toUpperCase());			
+				filters.push(Url);	
+					
+				ZLTDBM_UTILITARIO_SRV.read("/MARCA_POR_URL_PORTALSet", {	
+					filters: filters,				
+					success: function (result) {
+						MarcaConfig = result.results[0];			
+						that.onObtenerMarca();																																		
+					},
+					error: function (err) {
+
+					}
+				});
 			},
 			obtenerMarcaPais: function (flag) {
 
@@ -286,6 +306,10 @@ sap.ui.define([
                         that.byId("idMarca").setModel(jsonModelMarcaPais); 
                         var jsonModel = new sap.ui.model.json.JSONModel(aResults[0]);	
 						that.getView().setModel(jsonModel, "datoMarca");
+						if(MarcaConfig.Flag == "X"){
+							var keyMarca = that.onGetKeyMarca(Datos.aMarcasPais,MarcaConfig.Land1,MarcaConfig.Kondm);
+							oThisView.byId("idMarca").setSelectedKey(keyMarca);
+						}
 						that.onGetclasepedidos();
                         }
                         else{
@@ -298,6 +322,17 @@ sap.ui.define([
 					}
 				});
 			},
+			onGetKeyMarca: function(oData,Land1,Kondm){
+				var key = "";
+				$.each(oData,function(n,m){
+					if(m.Land1 == Land1 && m.Kondm == Kondm){
+						key = m.Land1 + ' ' +'-' + ' ' +m.Landx + ' ' +'-' + ' ' + m.Kondm + ' ' + '-'+ ' ' + m.VtextKondm;
+						var jsonModel = new sap.ui.model.json.JSONModel(m);	
+						that.getView().setModel(jsonModel, "datoMarca");
+					}
+				})
+				return key;
+			}, 
             onDialogoVisualizarDatosMarca: function(){
 				var oView = this.getView();				
 				if (!this.byId("dlgVisualizarDatosMarca")) {					
