@@ -324,11 +324,12 @@ sap.ui.define([
 			},
 			onGetKeyMarca: function(oData,Land1,Kondm){
 				var key = "";
+				var arrayMarcaSet = [];
 				$.each(oData,function(n,m){
 					if(m.Land1 == Land1 && m.Kondm == Kondm){
 						key = m.Land1 + ' ' +'-' + ' ' +m.Landx + ' ' +'-' + ' ' + m.Kondm + ' ' + '-'+ ' ' + m.VtextKondm;
-						var jsonModel = new sap.ui.model.json.JSONModel(m);	
-						that.getView().setModel(jsonModel, "datoMarca");
+						arrayMarcaSet.push(m);
+						DataMarca = arrayMarcaSet;
 					}
 				})
 				return key;
