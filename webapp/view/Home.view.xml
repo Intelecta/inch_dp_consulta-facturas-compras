@@ -87,7 +87,7 @@
 				requestAtLeastFields="LinkPdf" 
 				entitySet="CONSULTA_FACTURASSet" 
 				smartFilterId="sfconsultaFacturas" 
-				tableType="Table" 
+				tableType="ResponsiveTable" 
 				useExportToExcel="true" 
 				beforeExport="onBeforeExport" 
 				useVariantManagement="true" 

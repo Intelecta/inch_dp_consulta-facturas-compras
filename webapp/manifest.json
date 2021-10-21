@@ -126,7 +126,9 @@
                 "dataSource": "ZLTDBM_REPUESTOS_SRV",
                 "preload": true,
                 "settings": {
-                    "defaultCountMode": "Inline"
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "OneWay",
+                    "defaultCountMode": "InlineRepeat"
                    } 
             },
             "ZLTDBM_CONCESIONARIO_SRV": {

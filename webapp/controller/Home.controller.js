@@ -540,6 +540,14 @@ sap.ui.define([
 					}
 				});
 
-			}
+			},
+			onBeforeExport: function (oEvt) {				
+				var mExcelSettings = oEvt.getParameter("exportSettings");
+				// GW export
+				if (mExcelSettings.dataSource != undefined || mExcelSettings.dataSource != null) {
+					mExcelSettings.dataSource.count= oEvt.oSource._oTable.getBinding().iLength;
+					return;
+				}			
+			},
 		});
 	});
