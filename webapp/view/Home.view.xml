@@ -94,7 +94,7 @@
 				useTablePersonalisation="true" 
 				showRowCount="true" 
 				persistencyKey="pkstconsultaFacturas" 
-				enableAutoBinding="true" 
+				enableAutoBinding="false" 
 				class="sapUiResponsiveContentPadding" 
 				enableAutoColumnWidth="true" 
 				editTogglable="false" 
