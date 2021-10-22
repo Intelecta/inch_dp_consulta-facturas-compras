@@ -109,7 +109,7 @@
 							press="onVerFactura"/>
 					</OverflowToolbar>
 				</smartTable:customToolbar>
-				  	<t:Table threshold="1000" visibleRowCount="10" growingScrollToLoad="false" selectionMode="Single">
+				  	<t:Table threshold="99000" visibleRowCount="10" growingScrollToLoad="false" selectionMode="Single">
 					  <t:columns>
 							<t:Column width="7rem">
 								<Label text="% Descuento"/>
