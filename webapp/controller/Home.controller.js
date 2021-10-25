@@ -249,23 +249,30 @@ sap.ui.define([
 					success: function (result) {
 						if(result.results.length > 0){	
 						if(!result.results[0].LinkPdf){
+							sap.m.MessageToast.show("No se encontró pdf de la factura.");
 							return;
 						}						
-						var datos = that.hexToBase64(result.results[0].LinkPdf);
-						var objbuilder = '';
-						objbuilder += ('<object width="100%" height="100%" data="data:application/pdf;base64,');
-						objbuilder += (datos);
-						objbuilder += ('" type="application/pdf" class="internal">');
-						objbuilder += ('<embed src="data:application/pdf;base64,');
-						objbuilder += (datos);
-						objbuilder += ('" type="application/pdf" />');
-						objbuilder += ('</object>');
-						var win = window.open("#", "_blank");
-						var title = "PDF";
-						win.document.write('<html><title>' + title +
-							'</title><body style="margin-top:0px; margin-left: 0px; margin-right: 0px; margin-bottom: 0px;">');
-						win.document.write(objbuilder);
-						win.document.write('</body></html>');  
+						var datos = result.results[0].LinkPdf;
+						if(datos.includes("http") || datos.includes("https") ){
+							var win = window.open(datos, "_blank");
+						}
+						else{
+							var datos = that.hexToBase64(result.results[0].LinkPdf);
+							var objbuilder = '';
+							objbuilder += ('<object width="100%" height="100%" data="data:application/pdf;base64,');
+							objbuilder += (datos);
+							objbuilder += ('" type="application/pdf" class="internal">');
+							objbuilder += ('<embed src="data:application/pdf;base64,');
+							objbuilder += (datos);
+							objbuilder += ('" type="application/pdf" />');
+							objbuilder += ('</object>');
+							var win = window.open("#", "_blank");
+							var title = "PDF";
+							win.document.write('<html><title>' + title +
+								'</title><body style="margin-top:0px; margin-left: 0px; margin-right: 0px; margin-bottom: 0px;">');
+							win.document.write(objbuilder);
+							win.document.write('</body></html>');	
+						 }											
 						}        
 						sap.ui.core.BusyIndicator.hide();                                      											
 					},
