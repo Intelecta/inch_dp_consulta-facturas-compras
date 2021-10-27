@@ -253,7 +253,7 @@ sap.ui.define([
 							return;
 						}						
 						var datos = result.results[0].LinkPdf;
-						if(datos.includes("http") || datos.includes("https") ){
+						if(datos.includes("HTTP") || datos.includes("HTTPS") || datos.includes("https") || datos.includes("http") ){
 							var win = window.open(datos, "_blank");
 						}
 						else{
@@ -273,7 +273,10 @@ sap.ui.define([
 							win.document.write(objbuilder);
 							win.document.write('</body></html>');	
 						 }											
-						}        
+						}  
+						else{
+							sap.m.MessageToast.show("No se encontró pdf de la factura.");
+						}      
 						sap.ui.core.BusyIndicator.hide();                                      											
 					},
 					error: function (err) {
