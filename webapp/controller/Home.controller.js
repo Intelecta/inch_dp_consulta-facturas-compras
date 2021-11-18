@@ -32,6 +32,12 @@ sap.ui.define([
                 that.onGetDealer();
 				that.onGetMarcaPortal();	
 				//that.onGetEstadopedidos();
+
+				if(!navigator.onLine) {
+					sap.ui.core.BusyIndicator.show();
+					MessageToast.error("No hay conexión con el sistema. Contacte a administrador.");
+				}	
+
 			},
 			onGetMarcaPortal: function(){
 			    var URLbase = window.location.origin;
