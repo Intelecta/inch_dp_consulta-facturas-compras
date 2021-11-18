@@ -22,6 +22,12 @@ sap.ui.define([
 		var MarcaConfig;
 		return Controller.extend("inch_dp_consulta-facturas-compras.controller.Home", {
 			onInit: function () {
+
+				if(!navigator.onLine) {
+					sap.ui.core.BusyIndicator.show();
+					MessageToast.error("No hay conexión con el sistema. Contacte al administrador.");
+				}
+
 				that = this;
 				oThisView = that.getView();
 				ZLTDBM_UTILITARIO_SRV = this.getOwnerComponent().getModel("ZLTDBM_UTILITARIO_SRV");
@@ -31,12 +37,7 @@ sap.ui.define([
 				this.obtenerUsuarioLogueado();			   
                 that.onGetDealer();
 				that.onGetMarcaPortal();	
-				//that.onGetEstadopedidos();
-
-				if(!navigator.onLine) {
-					sap.ui.core.BusyIndicator.show();
-					MessageToast.error("No hay conexión con el sistema. Contacte a administrador.");
-				}	
+				//that.onGetEstadopedidos();				
 
 			},
 			onGetMarcaPortal: function(){
