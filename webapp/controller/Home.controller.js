@@ -20,6 +20,7 @@ sap.ui.define([
 		var DataMarca;
 		var Partner = "";
 		var MarcaConfig;
+		var IasEmail = "";
 		return Controller.extend("inch_dp_consulta-facturas-compras.controller.Home", {
 			onInit: function () {
 
@@ -35,7 +36,7 @@ sap.ui.define([
 				ZLTDBM_CONCESIONARIO_SRV = this.getOwnerComponent().getModel("ZLTDBM_CONCESIONARIO_SRV");
 				this.byId("vbox").setModel(ZLTDBM_REPUESTOS_SRV);				
 				this.obtenerUsuarioLogueado();			   
-                that.onGetDealer();
+                //that.onGetDealer();
 				that.onGetMarcaPortal();	
 				//that.onGetEstadopedidos();				
 
@@ -52,7 +53,7 @@ sap.ui.define([
 					filters: filters,				
 					success: function (result) {
 						MarcaConfig = result.results[0];			
-						that.onObtenerMarca();																																		
+						that.onGetDealer();																																	
 					},
 					error: function (err) {
 
@@ -132,6 +133,7 @@ sap.ui.define([
 					async: false,
 					dataType: "json",
 					success: function (response) {
+						IasEmail = response.email;
 						var Fullname = response.firstname + " " + response.lastname;
 						that.byId("tNamefb").setText(Fullname);
 						that.byId("tName").setText(Fullname);
@@ -307,16 +309,23 @@ sap.ui.define([
 				that.getView().setModel(jsonModelcurrentMarca, "DataMarca");
 				DataMarca = that.getView().getModel("DataMarca").getData();								
 			},
-            onObtenerMarca: function(){			
-				ZLTDBM_UTILITARIO_SRV.read("/marcasSet", {				
-					success: function (result) {
-                        
-                        if(result.results.length > 0){                      
+            onObtenerMarca: function(){	
+				that.byId("idMarca").setBusy(true);
+				var filters = [];								
+				var IasName = new sap.ui.model.Filter("Iasname", sap.ui.model.FilterOperator.EQ, IasEmail);			
+				filters.push(IasName);
+				var Land1 = new sap.ui.model.Filter("Land1", sap.ui.model.FilterOperator.EQ, "");			
+				filters.push(Land1);		
+				ZLTDBM_UTILITARIO_SRV.read("/marcasSet", {	
+					filters: filters,			
+					success: function (result) {                        
+                        if(result.results.length > 0){   
+						var DataFilter = that.FilterBrandByPartnerAndAppId(result.results);                   
                         var Datos = {};
-                        Datos.aMarcasPais = result.results;
-						that.getView().setModel(new JsonModel(result.results), "DataMarca");
+                        Datos.aMarcasPais = DataFilter;
+						that.getView().setModel(new JsonModel(DataFilter), "DataMarca");
 						DataMarca = that.getView().getModel("DataMarca").getData();
-						var aResults = result.results;					            
+						var aResults = DataFilter;					            
                         var jsonModel = new sap.ui.model.json.JSONModel(aResults);
                         var jsonModelMarcaPais = new sap.ui.model.json.JSONModel(Datos);
                         that.getView().setModel(jsonModel, "datosMarca");                          
@@ -327,6 +336,7 @@ sap.ui.define([
 							var keyMarca = that.onGetKeyMarca(Datos.aMarcasPais,MarcaConfig.Land1,MarcaConfig.Kondm);
 							oThisView.byId("idMarca").setSelectedKey(keyMarca);
 						}
+						that.byId("idMarca").setBusy(false);	
 						that.onGetclasepedidos();
                         }
                         else{
@@ -366,8 +376,14 @@ sap.ui.define([
 					this.byId("dlgVisualizarDatosMarca").open();
 				}
 			},
-            onGetDealer: function(){				
-				ZLTDBM_UTILITARIO_SRV.read("/DealerSet", {							
+            onGetDealer: function(){	
+				var filters = [];								
+				var IasName = new sap.ui.model.Filter("Iasname", sap.ui.model.FilterOperator.EQ, IasEmail);			
+				filters.push(IasName);
+				var Land1 = new sap.ui.model.Filter("Land1", sap.ui.model.FilterOperator.EQ, "");			
+				filters.push(Land1);			
+				ZLTDBM_UTILITARIO_SRV.read("/DealerSet", {	
+					filters: filters,						
 					success: function (result) {					
 					if(result.results.length>0){                        	
 						var Dealerarray = that.onDeleteDealerRepeated(result.results);
@@ -382,7 +398,8 @@ sap.ui.define([
 							that.byId("idDealers").setEnabled(false);                            
 						}
 						that.byId("idDealers").setValue(Dealer);
-                        that.getView().setModel(jsonModel, "datoDealerCab");						                                       			                      
+                        that.getView().setModel(jsonModel, "datoDealerCab");	
+						that.onObtenerMarca();					                                       			                      
 					}
                     else{
                         var message = "Estimado" +" " +thes.byId("tNamefb").getText() +" " +"usted no cuenta con Dealer asociado";
@@ -467,7 +484,8 @@ sap.ui.define([
 					Partner = oSelectedItem.getTitle();
                     var jsonModel = new sap.ui.model.json.JSONModel(dealer);
                     that.getView().setModel(jsonModel, "datoDealerCab");
-                   
+					that.byId("idMarca").setBusy(true);				
+					that.onObtenerMarca();
 				}
 				evt.getSource().getBinding("items").filter([]);
 			},
@@ -565,6 +583,22 @@ sap.ui.define([
 					mExcelSettings.dataSource.count= oEvt.oSource._oTable.getBinding().iLength;
 					return;
 				}			
+			},
+			FilterBrandByPartnerAndAppId: function (aResults) {
+				// AppId = 0002 ID para el portal de Repuestos										
+				var aResultsAux = [];
+				var isFound;
+				$.each(aResults, (idx, value) => {
+					if(Partner == value.Partner){					
+					isFound = aResultsAux.find(element => element.Kondm === value.Kondm && element.Land1 === value.Land1);
+					if (!isFound) {
+						if (value.AppId == AppId) {
+							aResultsAux.push(value);
+						}
+					}
+				   }
+				});
+				return aResultsAux;
 			},
 		});
 	});
