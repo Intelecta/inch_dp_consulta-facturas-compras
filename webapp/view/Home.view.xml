@@ -121,6 +121,104 @@
 										value='\{"columnKey": "PorcentajeDescuentos", "leadingProperty": "PorcentajeDescuentos", "columnIndex": 18}'/>
 								</t:customData>
 							</t:Column>
+
+                            <t:Column width="10rem" hAlign="End" >
+                              <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "CantidadDocumento",  "leadingProperty": "CantidadDocumento","filterProperty": "CantidadDocumento", "sortProperty": "CantidadDocumento" ,"columnIndex": 8 }' />
+                              </t:customData>
+                              <Label text="{i18n>CantidadDocumento}" />
+                              <t:template >                               
+                              <Text text="{parts: [{path: 'CantidadDocumento'}], formatter: '.formatter.getCurrencyInstance'}" /> 
+                              </t:template>
+                            </t:Column>
+
+
+                            <t:Column width="10rem" hAlign="End" >
+                              <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "ImporteNeto",  "leadingProperty": "ImporteNeto","filterProperty": "ImporteNeto", "sortProperty": "ImporteNeto" ,"columnIndex": 10 }' />
+                              </t:customData>
+                              <Label text="{i18n>ImporteNeto}" />
+                              <t:template >                               
+                              <Text text="{parts: [{path: 'ImporteNeto'}], formatter: '.formatter.getCurrencyInstance'}" /> 
+                              </t:template>
+                            </t:Column>
+
+
+                            <t:Column width="10rem" hAlign="End" >
+                              <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "Cantidad",  "leadingProperty": "Cantidad","filterProperty": "Cantidad", "sortProperty": "Cantidad" ,"columnIndex": 15 }' />
+                              </t:customData>
+                              <Label text="{i18n>Cantidad}" />
+                              <t:template >                               
+                              <Text text="{parts: [{path: 'Cantidad'}], formatter: '.formatter.getCurrencyInstance'}" /> 
+                              </t:template>
+                            </t:Column>
+
+
+                            <t:Column width="10rem" hAlign="End" >
+                              <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "Importe",  "leadingProperty": "Importe","filterProperty": "Importe", "sortProperty": "Importe" ,"columnIndex": 16 }' />
+                              </t:customData>
+                              <Label text="{i18n>Importe}" />
+                              <t:template >                               
+                              <Text text="{parts: [{path: 'Importe'}], formatter: '.formatter.getCurrencyInstance'}" /> 
+                              </t:template>
+                            </t:Column>
+
+
+                            <t:Column width="10rem" hAlign="End" >
+                              <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "PrecioUnitario",  "leadingProperty": "PrecioUnitario","filterProperty": "PrecioUnitario", "sortProperty": "PrecioUnitario" ,"columnIndex": 17 }' />
+                              </t:customData>
+                              <Label text="{i18n>PrecioUnitario}" />
+                              <t:template >                               
+                              <Text text="{parts: [{path: 'PrecioUnitario'}], formatter: '.formatter.getCurrencyInstance'}" /> 
+                              </t:template>
+                            </t:Column>
+
+
+                            <t:Column width="10rem" hAlign="End" >
+                              <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "Descuentos",  "leadingProperty": "Descuentos","filterProperty": "Descuentos", "sortProperty": "Descuentos" ,"columnIndex": 18 }' />
+                              </t:customData>
+                              <Label text="{i18n>Descuentos}" />
+                              <t:template >                               
+                              <Text text="{parts: [{path: 'Descuentos'}], formatter: '.formatter.getCurrencyInstance'}" /> 
+                              </t:template>
+                            </t:Column>
+
+
+                            <t:Column width="10rem" hAlign="End" >
+                              <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "Recargo",  "leadingProperty": "Recargo","filterProperty": "Recargo", "sortProperty": "Recargo" ,"columnIndex": 19 }' />
+                              </t:customData>
+                              <Label text="{i18n>Recargo}" />
+                              <t:template >                               
+                              <Text text="{parts: [{path: 'Recargo'}], formatter: '.formatter.getCurrencyInstance'}" /> 
+                              </t:template>
+                            </t:Column>
+
+
+                            <t:Column width="10rem" hAlign="End" >
+                              <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "SubTotal",  "leadingProperty": "SubTotal","filterProperty": "SubTotal", "sortProperty": "SubTotal" ,"columnIndex": 20 }' />
+                              </t:customData>
+                              <Label text="{i18n>SubTotal}" />
+                              <t:template >                               
+                              <Text text="{parts: [{path: 'SubTotal'}], formatter: '.formatter.getCurrencyInstance'}" /> 
+                              </t:template>
+                            </t:Column>
+
+
+                            <t:Column width="10rem" hAlign="End" >
+                              <t:customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "Impuesto",  "leadingProperty": "Impuesto","filterProperty": "Impuesto", "sortProperty": "Impuesto" ,"columnIndex": 21 }' />
+                              </t:customData>
+                              <Label text="{i18n>Impuesto}" />
+                              <t:template >                               
+                              <Text text="{parts: [{path: 'Impuesto'}], formatter: '.formatter.getCurrencyInstance'}" /> 
+                              </t:template>
+                            </t:Column>
 							</t:columns>
 					</t:Table>
                 </smartTable:SmartTable>

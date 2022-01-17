@@ -3,12 +3,13 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/Fragment",
 	"sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
+    "sap/ui/model/FilterOperator",
+	"../model/formatter",
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (Controller, JsonModel, Fragment,Filter, FilterOperator) {
+	function (Controller, JsonModel, Fragment,Filter, FilterOperator,formatter) {
 		"use strict";
 		var ZLTDBM_UTILITARIO_SRV;
 		var ZLTDBM_REPUESTOS_SRV;
@@ -20,8 +21,10 @@ sap.ui.define([
 		var DataMarca;
 		var Partner = "";
 		var MarcaConfig;
+		var BTPUsermail = "";
 		var IasEmail = "";
 		return Controller.extend("inch_dp_consulta-facturas-compras.controller.Home", {
+			formatter: formatter,
 			onInit: function () {
 
 				if(!navigator.onLine) {
@@ -134,14 +137,31 @@ sap.ui.define([
 					dataType: "json",
 					success: function (response) {
 						IasEmail = response.email;
+						BTPUsermail = response.email;			
 						var Fullname = response.firstname + " " + response.lastname;
 						that.byId("tNamefb").setText(Fullname);
 						that.byId("tName").setText(Fullname);
+						that.onGetConfigUser();
 					},
 					error: function (error) {
 						sap.m.MessageToast.show("No se ha podido obtener los datos del usuario");
 					}
 				});
+			},
+			onGetConfigUser: function(){				
+			    var filters = [];								
+				var btpuser = new sap.ui.model.Filter("Btpuser", sap.ui.model.FilterOperator.EQ, BTPUsermail);			
+				filters.push(btpuser);					
+				ZLTDBM_UTILITARIO_SRV.read("/VALORESFIJOS_USUARIOSet", {	
+					filters: filters,				
+					success: function (result) {										
+					var jsonModel = new sap.ui.model.json.JSONModel(result.results);
+					sap.ui.getCore().setModel(jsonModel,"ConfigUser");																																							
+					},
+					error: function (err) {
+
+					}
+				});	
 			},
 
 			onDialogoVisualizarMarcaPais: function () {
