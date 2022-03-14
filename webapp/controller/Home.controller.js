@@ -265,20 +265,25 @@ sap.ui.define([
 				var filters = [];
 				var indices = this.byId("stconsultaFacturas").getTable().getSelectedIndices();
 				if (indices.length === 0) {
+					sap.m.MessageToast.show("Por favor seleccione una fila");
+					sap.ui.core.BusyIndicator.hide(); 
 					return;
 				}
 				var reg = this.byId("stconsultaFacturas").getTable().getContextByIndex(indices[0]).getProperty();
 				if (!reg.NumeroFactura) {
+					sap.m.MessageToast.show("No cuenta con número de factura");
+					sap.ui.core.BusyIndicator.hide(); 
 					return;
 				}
 				var factura = new sap.ui.model.Filter("NumeroFactura", sap.ui.model.FilterOperator.EQ, reg.NumeroFactura);
 				filters.push(factura);
 				ZLTDBM_CONCESIONARIO_SRV.read("/PDFSet", {	
 					filters: filters,		
-					success: function (result) {
+					success: function (result) {						
 						if(result.results.length > 0){	
 						if(!result.results[0].LinkPdf){
 							sap.m.MessageToast.show("No se encontró pdf de la factura.");
+							sap.ui.core.BusyIndicator.hide();  
 							return;
 						}						
 						var datos = result.results[0].LinkPdf;
@@ -304,6 +309,7 @@ sap.ui.define([
 						 }											
 						}  
 						else{
+							sap.ui.core.BusyIndicator.hide();
 							sap.m.MessageToast.show("No se encontró pdf de la factura.");
 						}      
 						sap.ui.core.BusyIndicator.hide();                                      											
